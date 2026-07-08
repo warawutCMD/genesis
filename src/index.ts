@@ -4,3 +4,4 @@ export * from "./tools/calculator.tool.js";
 export * from "./runtime/runtime.js";
 export * from "./planner/planner.js";
 export * from "./planner/rule.planner.js";
+export * from "./agent/agent.js";
