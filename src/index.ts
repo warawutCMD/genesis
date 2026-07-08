@@ -1,1 +1,1 @@
-console.log("Genesis Runtime booting...");
+export * from "./core/types.js";
