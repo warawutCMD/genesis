@@ -1,9 +1,16 @@
-import type { Action, Task } from "../core/types.js";
+import type { Action, Observation, Task } from "../core/types.js";
 
 import type { Planner } from "./planner.js";
 
 export class RulePlanner implements Planner {
-  async plan(task: Task): Promise<Action> {
+  async plan(task: Task, history: Observation[] = []): Promise<Action> {
+    if (history.length > 0) {
+      return {
+        type: "finish",
+        result: history[history.length - 1].output,
+      };
+    }
+
     const match = task.input.match(/calculate\s+(\d+)\s*\+\s*(\d+)/i);
 
     if (match) {

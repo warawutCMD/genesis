@@ -27,3 +27,9 @@ export type ExecutionState = "pending" | "running" | "completed" | "failed";
 export type ExecutionContext = {
   taskId: string;
 };
+
+export type AgentState = {
+  task: Task;
+  history: Observation[];
+  iteration: number;
+};

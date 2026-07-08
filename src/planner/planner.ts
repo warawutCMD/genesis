@@ -1,5 +1,5 @@
-import type { Action, Task } from "../core/types.js";
+import type { Action, Task, Observation } from "../core/types.js";
 
 export interface Planner {
-  plan(task: Task): Promise<Action>;
+  plan(task: Task, history: Observation[]): Promise<Action>;
 }

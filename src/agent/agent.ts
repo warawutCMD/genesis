@@ -9,7 +9,7 @@ export class Agent {
   ) {}
 
   async run(task: Task): Promise<Observation> {
-    const action = await this.planner.plan(task);
+    const action = await this.planner.plan(task, []);
 
     return this.runtime.execute(action);
   }
