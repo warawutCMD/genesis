@@ -18,7 +18,10 @@ export type Action =
 
 export type Observation = {
   success: boolean;
-  output: unknown;
+  output?: unknown;
+  error?: {
+    message: string;
+  };
 };
 
 
@@ -27,3 +30,7 @@ export type ExecutionState =
   | "running"
   | "completed"
   | "failed";
+
+export type ExecutionContext = {
+  taskId: string;
+};
