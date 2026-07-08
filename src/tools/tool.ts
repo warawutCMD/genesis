@@ -3,7 +3,5 @@ export interface Tool<Input = unknown, Output = unknown> {
 
   description: string;
 
-  execute(
-    input: Input
-  ): Promise<Output>;
+  execute(input: Input): Promise<Output>;
 }

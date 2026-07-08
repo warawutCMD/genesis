@@ -3,7 +3,6 @@ export type Task = {
   input: string;
 };
 
-
 export type Action =
   | {
       type: "tool";
@@ -15,7 +14,6 @@ export type Action =
       result: unknown;
     };
 
-
 export type Observation = {
   success: boolean;
   output?: unknown;
@@ -24,12 +22,7 @@ export type Observation = {
   };
 };
 
-
-export type ExecutionState =
-  | "pending"
-  | "running"
-  | "completed"
-  | "failed";
+export type ExecutionState = "pending" | "running" | "completed" | "failed";
 
 export type ExecutionContext = {
   taskId: string;

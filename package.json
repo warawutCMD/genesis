@@ -5,14 +5,12 @@
   "description": "A minimal AI Runtime implementation for learning agent architecture",
   "type": "module",
   "packageManager": "pnpm@11.10.0",
-
   "scripts": {
     "dev": "tsx src/index.ts",
     "build": "tsc",
     "test": "vitest run",
     "test:watch": "vitest"
   },
-
   "devDependencies": {
     "@types/node": "^26.1.0",
     "tsx": "^4.23.0",
