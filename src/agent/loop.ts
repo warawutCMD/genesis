@@ -2,11 +2,13 @@ import type { Task, Observation, AgentState } from "../core/types.js";
 import type { Planner } from "../planner/planner.js";
 import { Runtime } from "../runtime/runtime.js";
 import { EventEmitter } from "../events/event.emitter.js";
+import type { Memory } from "../memory/memory.js";
 
 export class AgentLoop {
   constructor(
     private readonly planner: Planner,
     private readonly runtime: Runtime,
+    private readonly memory: Memory,
     private readonly events = new EventEmitter(),
     private readonly maxIterations = 10,
   ) {}
@@ -18,6 +20,8 @@ export class AgentLoop {
       iteration: 0,
     };
 
+    await this.memory.clear();
+
     this.events.emit({
       type: "agent.started",
       taskId: task.id,
@@ -28,7 +32,8 @@ export class AgentLoop {
         type: "planner.started",
       });
 
-      const action = await this.planner.plan(task, state.history);
+      const history = await this.memory.getAll();
+      const action = await this.planner.plan(task, history);
 
       this.events.emit({
         type: "action.created",
@@ -46,7 +51,8 @@ export class AgentLoop {
         observation,
       });
 
-      state.history.push(observation);
+      await this.memory.add(observation);
+      state.history = await this.memory.getAll();
 
       state.iteration++;
     }

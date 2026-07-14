@@ -6,6 +6,7 @@ import { ToolRegistry } from "../src/tools/registry.js";
 import { CalculatorTool } from "../src/tools/calculator.tool.js";
 import { RulePlanner } from "../src/planner/rule.planner.js";
 import { EventEmitter } from "../src/events/event.emitter.js";
+import { InMemoryMemory } from "../src/memory/in-memory.memory.js";
 
 describe("AgentLoop Events", () => {
   it("should emit agent lifecycle events", async () => {
@@ -24,7 +25,8 @@ describe("AgentLoop Events", () => {
       received.push(event);
     });
 
-    const loop = new AgentLoop(planner, runtime, events);
+    const memory = new InMemoryMemory();
+    const loop = new AgentLoop(planner, runtime, memory, events);
 
     await loop.run({
       id: "1",

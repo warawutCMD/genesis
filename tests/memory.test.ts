@@ -3,29 +3,32 @@ import { describe, expect, it } from "vitest";
 import { InMemoryMemory } from "../src/memory/in-memory.memory.js";
 
 describe("Memory", () => {
-  it("should store observations", () => {
+  it("should store observations", async () => {
     const memory = new InMemoryMemory();
 
-    memory.add({
+    await memory.add({
       success: true,
       output: 30,
     });
 
-    expect(memory.get()).toHaveLength(1);
+    const observations = await memory.getAll();
 
-    expect(memory.get()[0].output).toBe(30);
+    expect(observations).toHaveLength(1);
+    expect(observations[0].output).toBe(30);
   });
 
-  it("should clear memory", () => {
+  it("should clear memory", async () => {
     const memory = new InMemoryMemory();
 
-    memory.add({
+    await memory.add({
       success: true,
       output: 10,
     });
 
-    memory.clear();
+    await memory.clear();
 
-    expect(memory.get()).toHaveLength(0);
+    const observations = await memory.getAll();
+
+    expect(observations).toHaveLength(0);
   });
 });
