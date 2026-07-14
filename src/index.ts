@@ -8,3 +8,5 @@ export * from "./agent/agent.js";
 export * from "./agent/loop.js";
 export * from "./events/event.emitter.js";
 export * from "./events/types.js";
+export * from "./memory/memory.js";
+export * from "./memory/in-memory.memory.js";
